@@ -1,34 +1,56 @@
-import RecipeCard from "./RecipeCard";
-import CurrentTimeClock from "./CurrentTimeClock";
-import CurrentDate from "./CurrentDate";
-import YourName from "./YourName";
-import Separator from "./Separator";
+import RecipeForm from './RecipeForm';
+import SearchBar from './SearchBar';
+import RecipeCard from './RecipeCard';
+import Separator from './Separator';
 
-function MainContent() {
-    return(
-        <main className="">
-            <p className="fs-5">Welcome to your personal</p>
-            <h1>Recipe Finder!</h1>
-            <div className="px-5 row">
-                <div className="col-2 fs-4">
-                    <CurrentDate/>
-                </div>
-                <div className="col-2 fs-4">
-                    <CurrentTimeClock/>
-                </div>
-                <div className="col-8">
-                    <YourName/>
-                </div>
-                </div>
+function MainContent({
+                         recipes,
+                         addRecipe,
+                         deleteRecipe,
+                         searchTerm,
+                         setSearchTerm,
+                         selectedCategory,
+                         setSelectedCategory
+                     }) {
+    return (
+        <>
+            <div className="container my-5">
+                <RecipeForm addRecipe={addRecipe}/>
+            </div>
             <Separator/>
-            <h1>Catalogue of recipes</h1>
-                <div className="p-5 row g-5">
-                    <RecipeCard recipeName={"Beshparmak"}/>
-                    <RecipeCard recipeName={"Steak"}/>
-                    <RecipeCard recipeName={"Pasta Carbonara"}/>
+            <div className="container my-5">
+                <SearchBar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                />
+                <h3 className="mb-4">
+                    {selectedCategory === 'All' ? 'All Recipes' : `${selectedCategory} Recipes`}
+                </h3>
+
+                <div className="row">
+                    {/*conditional rendering*/}
+                    {recipes.length === 0 ? (
+                        <div className="col-12">
+                            <div className="alert alert-info text-center">
+                                <h5>No recipes found!</h5>
+                                <p>Try adjusting your search or add a new recipe above.</p>
+                            </div>
+                        </div>
+                    ) : (
+                        recipes.map((recipe) => (
+                            <RecipeCard
+                                key={recipe.id}
+                                recipe={recipe}
+                                deleteRecipe={deleteRecipe}
+                            />
+                        ))
+                    )}
                 </div>
-        </main>
-);
+            </div>
+        </>
+    );
 }
 
 export default MainContent;
