@@ -1,18 +1,42 @@
-# Theory questions
+# Project Title: Recipe-Finder-App
 
-### 1) What is a Single Page Application (SPA)?
-Single-page application is web application that is loaded only once. Everything the app or website has will be loaded on a single page and get update as the user interacats with the elements`
-### 2) How does SPA differ from traditional Multi-Page Applications (MPA)?
-Main difference is in the number of pages. SPA, as the name suggests, has a single page, while the traditional has as many as it needs.
+- RecipeFinderApp is a simple Single-Page-App dedicated to help people find recipes with ease
+- It will not only allow search by names, but also by current available ingredients, allergies, and time-to-make
+- Future feature would be planer for meals for the week
+- Its main purpose is to simplify the process of choosing what to cook for meals
 
-This creates great difference in performance. SPA loads page once, while the MPA has to load every page. However, that also means SEO optimisation and development for SPA is significantly more complex than MPA
+### Target audience & problem the app solves:
+- The app is mainly for those who cook at home for either themselves or family
+- We often face the problem of choosing what to cook with available resources and available time and this app aims
 
-### 3) What is the Virtual DOM?
-Virtual DOM is a light copy of the original Data Object Model that will be changed as the user interacts with the web-application
+### Features: 
+- Adding custom recipes
+- Searching through existing recipes
+- Managing your recipes
+- Filtering recipes by meal type
 
-Instead of changing the whole DOM, virtual DOM updates only changed elements, improving performance of the web-app
+## How to Run the Project
 
-### 4) Why does React use a component-based architecture?
-Component-based architecture is creating a project with reusable building blocks that return JSX. They only need to be written once to be used unlimited amount of times across the web-app.
+### You must have:
+- Node.js (v14 or higher)
+- npm or yarn
 
-It also creates consistent UI and allows for simpler maintenance,
+1. **Clone the repository**
+   ```
+   git clone <https://github.com/Sultan-Tas/RecipeFinderApp>
+   cd recipe-finder-app
+   ```
+
+2. **Install dependencies**
+   ```
+   npm install
+   ```
+
+3. **Start the development server**
+   ```
+   npm start
+   ```
+
+4. **Open in browser**
+    - The app will automatically open at `http://localhost:3000`
+    - If it did not open, guide your browser manually
