@@ -9,6 +9,7 @@ import About from "./components/About";
 import AboutTeam from "./components/AboutComponents/AboutTeam";
 import AboutStory from "./components/AboutComponents/AboutStory";
 import AboutMission from "./components/AboutComponents/AboutMission";
+import Contacts from "./components/Contacts";
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
@@ -100,7 +101,7 @@ function App() {
                             <Route path="story" element={<AboutStory/>}/>
                             <Route path="mission" element={<AboutMission/>}/>
                         </Route>
-                        <Route path="/contact"/>
+                        <Route path="/contact" element={<Contacts/>}/>
                     </Routes>
                 </div>
                 <Footer />
