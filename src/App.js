@@ -3,6 +3,14 @@ import { useState } from 'react';
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
 import Footer from "./components/Footer";
+import RecipeForm from "./components/RecipeForm";
+import RecipePage from "./components/RecipePage";
+import About from "./components/About";
+import AboutTeam from "./components/AboutComponents/AboutTeam";
+import AboutStory from "./components/AboutComponents/AboutStory";
+import AboutMission from "./components/AboutComponents/AboutMission";
+
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
     const [recipes, setRecipes] = useState([
@@ -18,7 +26,7 @@ function App() {
             id: 2,
             name: 'Caesar Salad',
             ingredients: 'Romaine lettuce, parmesan, mayonnaise, chicken',
-            instructions: 'Boil chicken, chop lettuce and chicken, add toppings, cover with mayonnaise.',
+            instructions: 'Boil chicken. Chop lettuce and chicken. Add toppings and cover with mayonnaise.',
             category: 'Lunch',
             prepTime: 30
         },
@@ -63,26 +71,41 @@ function App() {
     };
 
     const filteredRecipes = getFilteredRecipes();
-    const totalRecipes = recipes.reduce((count) => count + 1, 0);
 
     return (
-        <div className="App">
-            <Header totalRecipes={totalRecipes} />
-
-            <div>
-                <MainContent
-                    recipes={filteredRecipes}
-                    addRecipe={addRecipe}
-                    deleteRecipe={deleteRecipe}
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                />
+        <Router>
+            <div className="App">
+                <Header/>
+                <div>
+                    <Routes>
+                        <Route path="/" element={
+                            <MainContent
+                                recipes={filteredRecipes}
+                                deleteRecipe={deleteRecipe}
+                                searchTerm={searchTerm}
+                                setSearchTerm={setSearchTerm}
+                                selectedCategory={selectedCategory}
+                                setSelectedCategory={setSelectedCategory}
+                            />}>
+                        </Route>
+                        <Route path="recipe/:id" element={
+                            <RecipePage
+                                recipes = {recipes}
+                            />
+                        }/>
+                        <Route path="/add_recipe" element={
+                            <RecipeForm addRecipe={addRecipe} />}/>
+                        <Route path="/about" element={<About/>}>
+                            <Route path="team" element={<AboutTeam/>}/>
+                            <Route path="story" element={<AboutStory/>}/>
+                            <Route path="mission" element={<AboutMission/>}/>
+                        </Route>
+                        <Route path="/contact"/>
+                    </Routes>
+                </div>
+                <Footer />
             </div>
-
-            <Footer />
-        </div>
+        </Router>
     );
 }
 

@@ -1,11 +1,10 @@
-import RecipeForm from './RecipeForm';
 import SearchBar from './SearchBar';
 import RecipeCard from './RecipeCard';
 import Separator from './Separator';
+import { Link } from "react-router-dom"
 
 function MainContent({
                          recipes,
-                         addRecipe,
                          deleteRecipe,
                          searchTerm,
                          setSearchTerm,
@@ -15,20 +14,20 @@ function MainContent({
     return (
         <>
             <div className="container my-5">
-                <RecipeForm addRecipe={addRecipe}/>
-            </div>
-            <Separator/>
-            <div className="container my-5">
                 <SearchBar
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
+                <Link to="/add_recipe" className="btn btn-primary">Add new recipe</Link>
+            </div>
+            <Separator/>
+            <div className="container my-5">
+
                 <h3 className="mb-4">
                     {selectedCategory === 'All' ? 'All Recipes' : `${selectedCategory} Recipes`}
                 </h3>
-
                 <div className="row">
                     {/*conditional rendering*/}
                     {recipes.length === 0 ? (

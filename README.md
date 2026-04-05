@@ -7,7 +7,7 @@
 
 ### Target audience & problem the app solves:
 - The app is mainly for those who cook at home for either themselves or family
-- We often face the problem of choosing what to cook with available resources and available time and this app aims
+- We often face the problem of choosing what to cook with available resources and available time and this app aims to solve these problems!
 
 ### Features: 
 - Adding custom recipes

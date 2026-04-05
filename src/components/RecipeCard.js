@@ -1,6 +1,8 @@
+import {Link} from "react-router-dom";
+
 function RecipeCard({ recipe, deleteRecipe }) {
     //destructing recipe into array of data
-    const { id, name, ingredients, instructions, category, prepTime } = recipe;
+    const { id, name, ingredients, category, prepTime } = recipe;
 
     const handleDelete = () => {
         deleteRecipe(id); // Call parent function with recipe ID
@@ -8,7 +10,9 @@ function RecipeCard({ recipe, deleteRecipe }) {
 
     return (
         <div className="col-md-6 col-lg-4 mb-4">
+
             <div className="card h-100">
+                <Link to={`recipe/${id}`} className="text-decoration-none text-reset">
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <span className="badge bg-primary mb-2">{category}</span>
@@ -19,10 +23,8 @@ function RecipeCard({ recipe, deleteRecipe }) {
                     )}
                     <h6 className="mt-3">Ingredients:</h6>
                     <p className="card-text small">{ingredients}</p>
-                    <h6>Instructions:</h6>
-                    <p className="card-text small">{instructions}</p>
                 </div>
-
+                </Link>
                 <div className="card-footer">
                     <button className="btn btn-danger btn-sm w-50" onClick={handleDelete}>
                         Delete Recipe

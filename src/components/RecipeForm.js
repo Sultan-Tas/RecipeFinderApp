@@ -66,7 +66,7 @@ function RecipeForm({ addRecipe }) {
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Instructions <span style={{color: "red"}}>*</span></label>
+                            <label className="form-label">Instructions (separate each step with dots) <span style={{color: "red"}}>*</span></label>
                             <textarea
                                 className="form-control"
                                 name="instructions"
