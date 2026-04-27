@@ -12,6 +12,7 @@ import AboutMission from "./components/AboutComponents/AboutMission";
 import Contacts from "./components/Contacts";
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { ThemeProvider } from "./ThemeContext";
 
 function App() {
     const [recipes, setRecipes] = useState([
@@ -74,6 +75,7 @@ function App() {
     const filteredRecipes = getFilteredRecipes();
 
     return (
+        <ThemeProvider>
         <Router>
             <div className="App">
                 <Header/>
@@ -107,6 +109,7 @@ function App() {
                 <Footer />
             </div>
         </Router>
+        </ThemeProvider>
     );
 }
 

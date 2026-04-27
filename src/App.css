@@ -22,3 +22,29 @@ footer{
   color: white;
   background-color: #3a7e3a;
 }
+
+[data-bs-theme="light"] {
+  --custom-text-primary: #212529;
+  --custom-text-secondary: #6c757d;
+  --custom-text-light: #adb5bd;
+}
+
+[data-bs-theme="dark"] {
+  --custom-text-primary: #dee2e6;
+  --custom-text-secondary: #adb5bd;
+  --custom-text-light: #f8f9fa;
+}
+body {
+  color: var(--custom-text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+.separator {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+[data-bs-theme="light"] .separator{
+  background-color: lightgreen !important;
+}
+[data-bs-theme="dark"] .separator{
+  background-color: green !important;
+}

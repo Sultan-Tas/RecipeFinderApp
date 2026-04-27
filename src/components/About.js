@@ -9,9 +9,9 @@ function About(){
                 time-to-make
                 Future feature would be planer for meals for the week</p>
             <div className="d-flex p-5 gap-5">
-                <Link to="/about/team" className="fs-3 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Our Team</Link>
-                <Link to="/about/story" className="fs-3 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">The Story</Link>
-                <Link to="/about/mission" className="fs-3 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mission</Link>
+                <Link to="/about/team" className="fs-3 link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Our Team</Link>
+                <Link to="/about/story" className="fs-3 link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">The Story</Link>
+                <Link to="/about/mission" className="fs-3 link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mission</Link>
             </div>
             <Outlet/>
         </div>
