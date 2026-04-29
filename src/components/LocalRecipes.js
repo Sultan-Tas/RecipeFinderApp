@@ -3,7 +3,7 @@ import RecipeCard from './RecipeCard';
 import Separator from './Separator';
 import { Link } from "react-router-dom"
 
-function MainContent({
+function LocalRecipes({
                          recipes,
                          deleteRecipe,
                          searchTerm,
@@ -52,4 +52,4 @@ function MainContent({
     );
 }
 
-export default MainContent;
+export default LocalRecipes;

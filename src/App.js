@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import Header from "./components/Header";
-import MainContent from "./components/MainContent";
+import LocalRecipes from "./components/LocalRecipes";
 import Footer from "./components/Footer";
 import RecipeForm from "./components/RecipeForm";
 import RecipePage from "./components/RecipePage";
@@ -10,9 +10,13 @@ import AboutTeam from "./components/AboutComponents/AboutTeam";
 import AboutStory from "./components/AboutComponents/AboutStory";
 import AboutMission from "./components/AboutComponents/AboutMission";
 import Contacts from "./components/Contacts";
+import Homepage from "./components/Homepage";
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import { ThemeProvider } from "./ThemeContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { ProtectedRoute } from "./utils/ProtectedRoute"
+import Login from "./components/Login";
+import Browse from "./components/Browse";
 
 function App() {
     const [recipes, setRecipes] = useState([
@@ -81,16 +85,23 @@ function App() {
                 <Header/>
                 <div>
                     <Routes>
-                        <Route path="/" element={
-                            <MainContent
-                                recipes={filteredRecipes}
-                                deleteRecipe={deleteRecipe}
-                                searchTerm={searchTerm}
-                                setSearchTerm={setSearchTerm}
-                                selectedCategory={selectedCategory}
-                                setSelectedCategory={setSelectedCategory}
-                            />}>
-                        </Route>
+                        <Route path="/" element={<Homepage/>}/>
+                        <Route path="/my-recipes" element={
+                            <ProtectedRoute>
+                                <LocalRecipes
+                                    recipes={filteredRecipes}
+                                    deleteRecipe={deleteRecipe}
+                                    searchTerm={searchTerm}
+                                    setSearchTerm={setSearchTerm}
+                                    selectedCategory={selectedCategory}
+                                    setSelectedCategory={setSelectedCategory}
+                                />
+                            </ProtectedRoute>
+                        }/>
+
+
+                        <Route path="/browse" element={<Browse/>}/>
+
                         <Route path="recipe/:id" element={
                             <RecipePage
                                 recipes = {recipes}
@@ -98,12 +109,16 @@ function App() {
                         }/>
                         <Route path="/add_recipe" element={
                             <RecipeForm addRecipe={addRecipe} />}/>
+
+                         {/* header links */}
                         <Route path="/about" element={<About/>}>
                             <Route path="team" element={<AboutTeam/>}/>
                             <Route path="story" element={<AboutStory/>}/>
                             <Route path="mission" element={<AboutMission/>}/>
                         </Route>
                         <Route path="/contact" element={<Contacts/>}/>
+
+                        <Route path="/login" element={<Login/>}/>
                     </Routes>
                 </div>
                 <Footer />

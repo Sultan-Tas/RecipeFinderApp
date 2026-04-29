@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 import ThemeToggle from "./ThemeToggle";
 import { useState } from "react";
+import {useAuth} from "../contexts/AuthContext";
+import Logout from "./Logout";
 
 function Header(){
+    const { user } = useAuth();
     const [active, setActive] = useState("");
     return(
         <header
@@ -25,6 +28,16 @@ function Header(){
                     to="/about"
                     onClick={() => setActive("about")}
                     className={`mx-4 fs-5 link-light ${active === "about" ? "link-underline-opacity-100" : "link-underline-opacity-0"} link-underline-opacity-100-hover`}>About</Link>
+                {user ? (<>
+                    <Link to="/my-recipes" className="btn btn-outline-light mx-4 btn-lg">
+                        My Recipes
+                    </Link>
+                    <Logout/></>
+                ) : (
+                    <Link to="/login" className="btn btn-outline-light mx-4 btn-lg">
+                        Login
+                    </Link>
+                )}
                 <ThemeToggle/>
             </nav>
         </header>
