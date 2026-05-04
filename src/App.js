@@ -17,6 +17,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProtectedRoute } from "./utils/ProtectedRoute"
 import Login from "./components/Login";
 import Browse from "./components/Browse";
+import CuisineClassifier from "./components/CuisineClassifier";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
     const [recipes, setRecipes] = useState([
@@ -101,8 +103,8 @@ function App() {
 
 
                         <Route path="/browse" element={<Browse/>}/>
-
-                        <Route path="recipe/:id" element={
+                        <Route path="/classifier" element={<CuisineClassifier/>}/>
+                        <Route path="/recipe/:id" element={
                             <RecipePage
                                 recipes = {recipes}
                             />
@@ -119,6 +121,7 @@ function App() {
                         <Route path="/contact" element={<Contacts/>}/>
 
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </div>
                 <Footer />

@@ -12,7 +12,7 @@ function RecipeCard({ recipe, deleteRecipe }) {
         <div className="col-md-6 col-lg-4 mb-4">
 
             <div className="card h-100">
-                <Link to={`recipe/${id}`} className="text-decoration-none text-reset">
+                <Link to={`/recipe/${id}`} className="text-decoration-none text-reset">
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <span className="badge bg-primary mb-2">{category}</span>

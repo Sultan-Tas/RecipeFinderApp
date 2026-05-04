@@ -2,19 +2,24 @@ const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY;
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const buildUrl = (endpoint, params = {}) => {
-    const url = new URL(`${BASE_URL}${endpoint}`);
+    try {
+        const url = new URL(`${BASE_URL}${endpoint}`);
 
-    // Add API key
-    url.searchParams.append('apiKey', API_KEY);
+        // Add API key
+        url.searchParams.append('apiKey', API_KEY);
 
-    // add parameters
-    Object.entries(params).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== '') {
-            url.searchParams.append(key, value);
-        }
-    });
+        // add parameters
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== null && value !== undefined && value !== '') {
+                url.searchParams.append(key, value);
+            }
+        });
 
-    return url.toString();
+        return url.toString();
+    } catch (e){
+        console.error("API URL creation error: ", e);
+        throw e;
+    }
 };
 
 const handleResponse = async (response) => {
@@ -26,9 +31,7 @@ const handleResponse = async (response) => {
 };
 
 export const spoonacularAPI = {
-    /**
-     * Search recipes with filters
-     */
+    /* Search recipes with filters */
     searchRecipes: async (query = '', cuisine = '', diet = '', number = 3) => {
         try {
             const url = buildUrl('/recipes/complexSearch', {
@@ -55,6 +58,30 @@ export const spoonacularAPI = {
             return await handleResponse(response);
         } catch (error) {
             console.error('Error fetching recipe details:', error);
+            throw error;
+        }
+    },
+
+    /* Classify cuisine - POST request */
+    classifyCuisine: async (title, ingredientList) => {
+        try {
+            // Build URL with API key only (no other params for POST)
+            const url = buildUrl('/recipes/cuisine');
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    title: title,
+                    ingredientList: ingredientList
+                })
+            });
+
+            return await handleResponse(response);
+        } catch (error) {
+            console.error('Error classifying cuisine:', error);
             throw error;
         }
     }

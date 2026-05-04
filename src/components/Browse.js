@@ -5,6 +5,8 @@ import useDebounce from "../hooks/UseDebounce";
 
 function BrowseRecipes() {
     const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCuisine, setSelectedCuisine] = useState('');
@@ -18,13 +20,19 @@ function BrowseRecipes() {
     }, [debouncedQuery, selectedCuisine, selectedDiet]);
 
     const fetchRecipes = async () => {
-        const data = await spoonacularAPI.searchRecipes(
-            searchQuery,
-            selectedCuisine,
-            selectedDiet,
-            3
-        );
-        setRecipes(data.results || []);
+        try {
+            setLoading(true);
+            const data = await spoonacularAPI.searchRecipes(
+                searchQuery,
+                selectedCuisine,
+                selectedDiet,
+                3
+            );
+            setLoading(false);
+            setRecipes(data.results || []);
+        } catch (error){
+            setError(error)
+        }
     };
 
 
@@ -86,6 +94,8 @@ function BrowseRecipes() {
             </div>
 
             {/* Recipe Grid */}
+            {(loading === true) ? <div><p className="text-secondary fs-1">Loading...</p></div> : <div></div>}
+            {error ? <div><p className="text-danger fs-3">Error: ${error}</p></div> : <div></div>}
             {filteredRecipes.length > 0 && (
                 <>
                     <p className="text-muted mb-3">

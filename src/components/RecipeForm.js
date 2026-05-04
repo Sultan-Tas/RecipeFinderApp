@@ -24,6 +24,7 @@ function RecipeForm({ addRecipe }) {
             return; // Stop if validation fails
         }
         addRecipe(formData);
+        alert('Successfully added new recipe!')
 
         setFormData({
             name: '',

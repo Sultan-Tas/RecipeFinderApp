@@ -23,6 +23,9 @@ function Home() {
                                 <Link to="/my-recipes" className="btn btn-outline-light btn-lg">
                                     My Recipes
                                 </Link>
+                                <Link to="/classifier" className="btn btn-outline-light btn-lg">
+                                    Classifier
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-6 text-center mt-5 mt-lg-0">
