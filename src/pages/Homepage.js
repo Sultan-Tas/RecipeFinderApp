@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import Separator from "../components/Separator";
 
 function Home() {
     const { user } = useAuth();
@@ -87,8 +88,8 @@ function Home() {
                     </div>
                 </div>
             </section>
-
-            {/* CTA Section */}
+            <Separator/>
+            {/* another section */}
             <section className="cta-section bg-light py-5">
                 <div className="container text-center">
                     <h2 className="mb-4">Ready to Start Cooking?</h2>
@@ -110,7 +111,7 @@ function Home() {
                 </div>
             </section>
 
-            {/* Inline Styles for Feature Icons */}
+            {/* styles for feature icons */}
             <style>{`
                 .feature-icon {
                     font-size: 3rem;

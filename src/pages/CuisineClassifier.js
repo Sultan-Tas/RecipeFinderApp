@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { spoonacularAPI } from '../utils/Api';
 import useDebounce from "../hooks/UseDebounce";
+import useFetch from "../hooks/UseFetch";
 
 function CuisineClassifier() {
     const [result, setResult] = useState(null);
@@ -10,33 +11,24 @@ function CuisineClassifier() {
     const [title, setTitle] = useState('Chicken Tikka Masala');
     const [ingredients, setIngredients] = useState('chicken, yogurt, curry, rice, spices');
 
-    const debouncedTitle = useDebounce(title, 500);
-    const debouncedIngredients = useDebounce(ingredients, 500);
+    const debouncedTitle = useDebounce(title, 1000);
+    const debouncedIngredients = useDebounce(ingredients, 1000);
 
-    useEffect(() => {
-        if (debouncedTitle && debouncedIngredients) {
-            classifyCuisine();
-        }
-    }, [debouncedTitle, debouncedIngredients]);
-
-    const classifyCuisine = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-
-            const data = await spoonacularAPI.classifyCuisine(
-                debouncedTitle,
-                debouncedIngredients
-            );
-
-            setResult(data);
-        } catch (err) {
-            setError(err.message);
-            setResult(null);
-        } finally {
-            setLoading(false);
-        }
-    };
+    let data, refetch
+    try{
+        ({data, refetch} = useFetch(
+            spoonacularAPI.classifyCuisine,
+            [ debouncedTitle, debouncedIngredients],
+            [ debouncedTitle, debouncedIngredients]))
+        setLoading(true);
+        setError(null);
+        setResult(data);
+    } catch (err) {
+        setError(err.message);
+        setResult(null);
+    } finally {
+        setLoading(false);
+    }
 
     return (
         <div className="container mt-5">

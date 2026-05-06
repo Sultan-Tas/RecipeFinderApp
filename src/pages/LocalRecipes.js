@@ -1,6 +1,6 @@
-import SearchBar from './SearchBar';
-import RecipeCard from './RecipeCard';
-import Separator from './Separator';
+import SearchBar from '../components/SearchBar';
+import RecipeCard from '../components/RecipeCard';
+import Separator from '../components/Separator';
 import { Link } from "react-router-dom"
 
 function LocalRecipes({

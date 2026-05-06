@@ -1,16 +1,32 @@
 import {useParams} from "react-router-dom";
+import { spoonacularAPI } from '../utils/Api';
+import useFetch from "../hooks/UseFetch";
 
 function RecipePage({recipes}){
     //destructuring received recipe
     const { id} = useParams()
     const recipe = recipes.find(recipe => recipe.id === Number(id))
-    if(!recipe){
+    const {data, refetch} = useFetch(
+        recipe ? null : spoonacularAPI.getRecipeById,
+        recipe ? null : [id], [id]
+    )
+
+    let name, ingredients, instructions, prepTime
+    if(!recipe && data){
+        console.log(data)
+        name = data.title
+        ingredients = data.extendedIngredients.map(item => item.name).join(", ")
+        instructions = data.extendedIngredients.map(item => item.original).join(". ")
+        prepTime = data.readyInMinutes
+    }
+    else if(recipe) {
+        ({name, ingredients, instructions, prepTime} = recipe);
+    }
+    else{
         return(
             <h1 className="text-warning text-decoration-underline">Recipe was not found :(</h1>
         )
     }
-    const { name, ingredients, instructions, prepTime } = recipe;
-    console.log(recipe)
 
 
 

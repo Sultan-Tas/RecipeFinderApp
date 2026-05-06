@@ -1,24 +1,24 @@
 import './App.css';
 import { useState } from 'react';
 import Header from "./components/Header";
-import LocalRecipes from "./components/LocalRecipes";
+import LocalRecipes from "./pages/LocalRecipes";
 import Footer from "./components/Footer";
-import RecipeForm from "./components/RecipeForm";
-import RecipePage from "./components/RecipePage";
-import About from "./components/About";
+import RecipeForm from "./pages/RecipeForm";
+import RecipePage from "./pages/RecipePage";
+import About from "./pages/About";
 import AboutTeam from "./components/AboutComponents/AboutTeam";
 import AboutStory from "./components/AboutComponents/AboutStory";
 import AboutMission from "./components/AboutComponents/AboutMission";
-import Contacts from "./components/Contacts";
-import Homepage from "./components/Homepage";
+import Contacts from "./pages/Contacts";
+import Homepage from "./pages/Homepage";
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProtectedRoute } from "./utils/ProtectedRoute"
-import Login from "./components/Login";
-import Browse from "./components/Browse";
-import CuisineClassifier from "./components/CuisineClassifier";
-import PageNotFound from "./components/PageNotFound";
+import Login from "./pages/Login";
+import Browse from "./pages/Browse";
+import CuisineClassifier from "./pages/CuisineClassifier";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
     const [recipes, setRecipes] = useState([
