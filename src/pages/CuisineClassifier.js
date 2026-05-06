@@ -5,8 +5,6 @@ import useFetch from "../hooks/UseFetch";
 
 function CuisineClassifier() {
     const [result, setResult] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     const [title, setTitle] = useState('Chicken Tikka Masala');
     const [ingredients, setIngredients] = useState('chicken, yogurt, curry, rice, spices');
@@ -14,21 +12,15 @@ function CuisineClassifier() {
     const debouncedTitle = useDebounce(title, 1000);
     const debouncedIngredients = useDebounce(ingredients, 1000);
 
-    let data, refetch
-    try{
-        ({data, refetch} = useFetch(
-            spoonacularAPI.classifyCuisine,
-            [ debouncedTitle, debouncedIngredients],
-            [ debouncedTitle, debouncedIngredients]))
-        setLoading(true);
-        setError(null);
+    const { data, loading, error, refetch } = useFetch(
+        spoonacularAPI.classifyCuisine,
+        [debouncedTitle, debouncedIngredients],
+        [debouncedTitle, debouncedIngredients]
+    );
+
+    useEffect(() => {
         setResult(data);
-    } catch (err) {
-        setError(err.message);
-        setResult(null);
-    } finally {
-        setLoading(false);
-    }
+    }, [data]);
 
     return (
         <div className="container mt-5">
